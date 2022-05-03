@@ -11,6 +11,16 @@ const update = async (req, res) => {
   }
 };
 
+const getAll = async (req, res) => {
+  try {
+  const categories = await servicesCategories.getAll();
+  return res.status(200).json(categories);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   update,
+  getAll,
 };

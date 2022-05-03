@@ -9,6 +9,15 @@ const update = async ({ name }) => {
   }
 };
 
+const getAll = async () => {
+  try {
+    return await Category.findAll();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   update,
+  getAll,
 };
