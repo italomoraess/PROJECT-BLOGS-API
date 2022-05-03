@@ -5,7 +5,6 @@ const {
   verifyName, 
   verifyEmail,
   verifyPassword,
-  verifyToken,
 } = require('../middlewares/validationsUsers');
 
 const { 
@@ -13,6 +12,8 @@ const {
   getById, 
   update,
 } = require('../controllers/controllerUser');
+
+const { verifyToken } = require('../middlewares/validationsToken');
 
 router.post('/', verifyName, verifyEmail, verifyPassword, update);
 router.get('/', verifyToken, getAll);
