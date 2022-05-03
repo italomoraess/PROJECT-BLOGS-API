@@ -28,7 +28,7 @@ const update = async (req, res) => {
   const user = await serviceUser.update({ displayName, email, password, image });
   const token = jwt.sign(
     { id: user.id }, 
-    process.env.JWT_SECRET_KEY,
+    process.env.JWT_SECRET,
     { expiresIn: '1h', algorithm: 'HS256' },
   );
   res.status(201).json({ token });
