@@ -14,13 +14,14 @@ const verifyContent = (req, res, next) => {
   next();
 };
 
-const verifyCategory = (req, res, next) => {
+const verifyCategory = async (req, res, next) => {
   const { categoryIds } = req.body;
   if (!categoryIds) return res.status(400).json({ message: '"categoryIds" is required' });
-  categoryIds.map(async (categoryId) => {
-    const verify = await Category.findByPk(categoryId);
-    if (!verify) return res.status(400).json({ message: '"categoryIds" not found' });
-  });
+  
+  const categoies = await Category.findAll({ where: { id: categoryIds } });
+  if (categoies.length !== categoryIds.length) {
+    return res.status(400).json({ message: '"categoryIds" not found' });
+  }
 
   next();
 };
